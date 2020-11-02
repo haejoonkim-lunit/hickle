@@ -121,6 +121,9 @@ def register_class(myclass_type, hkl_str, dump_function, load_function,
         to_sort (bool): If the item is iterable, does it require sorting?
 
     """
+    if isinstance(hkl_str, bytes):
+        hkl_str = hkl_str.decode()
+
     types_dict[myclass_type] = (dump_function, hkl_str)
     hkl_types_dict[hkl_str] = load_function
     if not to_sort:
@@ -137,6 +140,9 @@ def register_class_exclude(hkl_str_to_ignore):
         hkl_str_to_ignore (str): attribute type=string to ignore and exclude
             from loading.
     """
+    if isinstance(hkl_str_to_ignore, bytes):
+        hkl_str_to_ignore = hkl_str_to_ignore.decode()
+
     hkl_types_dict[hkl_str_to_ignore] = load_nothing
 
 
